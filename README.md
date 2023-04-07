@@ -1,4 +1,4 @@
-# Debiam 11 Goss config
+# Debian 11 Goss config
 
 ## Overview
 
