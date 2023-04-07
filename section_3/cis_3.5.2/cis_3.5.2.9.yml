@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_2_9 }}
+{{ if .Vars.debian11cis_rule_3_5_2_9 }}
 service:
   nftables:
     title: 3.5.2.9 | Ensure nftables service is enabled

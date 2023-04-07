@@ -26,8 +26,8 @@ AUDIT_CONTENT_LOCATION="${AUDIT_CONTENT_LOCATION:-/var/tmp}"  # Location of the 
 
 # Goss benchmark variables (these should not need changing unless new release)
 BENCHMARK=CIS  # Benchmark Name aligns to the audit
-BENCHMARK_VER=1.1.0
-BENCHMARK_OS=UBUNTU2004
+BENCHMARK_VER=1.0.0
+BENCHMARK_OS=DEBIAN11
 
 
 
@@ -42,7 +42,8 @@ Help()
    echo "-f     optional - change the format output (default value = json) other working options documentation, rspecish"
    echo "-g     optional - Add a group that the server should be grouped with (default value = ungrouped)"
    echo "-o     optional - file to output audit data"
-   echo "-v     optional - relative path to thevars file to load (default e.g. $AUDIT_CONTENT_LOCATION/RHEL7-$BENCHMARK/vars/$BENCHMARK.yml)"
+   echo "-v     optional - relative path to thevars file to load (default e.g. ${PWD}/vars/$BENCHMARK.yml)"
+   echo "-1     optional - Set benchmark security level 1 (default level 2)"
    echo "-w     optional - Sets the system_type to workstation (Default - Server)"
    echo "-h     Print this Help."
    echo
@@ -51,15 +52,17 @@ Help()
 
 # Default vars that can be set
 host_system_type=Server
+system_level_2="true";
 
 ## option statement
-while getopts f:g:o:v::wh option; do
+while getopts f:g:o:v::w1h option; do
    case "${option}" in
         f ) FORMAT=${OPTARG} ;;
         g ) GROUP=${OPTARG} ;;
         o ) OUTFILE=${OPTARG} ;;
         v ) VARS_PATH=${OPTARG} ;;
         w ) host_system_type=Workstation ;;
+        1 ) system_level_2="false";;
         h ) # display Help
             Help
             exit;;
@@ -89,8 +92,7 @@ else
 fi
 
 os_maj_ver=`grep -w VERSION_ID= /etc/os-release | awk -F\" '{print $2}' | cut -d '.' -f1`
-audit_content_version=$os_vendor$os_maj_ver-$BENCHMARK-Audit
-audit_content_dir=$AUDIT_CONTENT_LOCATION/$audit_content_version
+audit_content_dir=${PWD}
 audit_vars=vars/${BENCHMARK}.yml
 
 # Set variable for format output
@@ -139,7 +141,7 @@ fi
 
 
 ## Set the AUDIT json string
-audit_json_vars='{"benchmark_type":"'"$BENCHMARK"'","benchmark_os":"'"$BENCHMARK_OS"'","benchmark_version":"'"$BENCHMARK_VER"'","machine_uuid":"'"$host_machine_uuid"'","epoch":"'"$host_epoch"'","os_locale":"'"$host_os_locale"'","os_release":"'"$host_os_version"'","os_distribution":"'"$host_os_name"'","os_hostname":"'"$host_os_hostname"'","auto_group":"'"$host_auto_group"'","system_type":"'"$host_system_type"'"}'
+audit_json_vars='{"benchmark_type":"'"$BENCHMARK"'","benchmark_os":"'"$BENCHMARK_OS"'","benchmark_version":"'"$BENCHMARK_VER"'","machine_uuid":"'"$host_machine_uuid"'","epoch":"'"$host_epoch"'","os_locale":"'"$host_os_locale"'","os_release":"'"$host_os_version"'","os_distribution":"'"$host_os_name"'","os_hostname":"'"$host_os_hostname"'","auto_group":"'"$host_auto_group"'","system_type":"'"$host_system_type"'","debian11cis_level_2":"'"$system_level_2"'"}'
 
 ## Run pre checks
 
@@ -169,11 +171,6 @@ else
    echo "## Pre-checks Successful"
    echo
 fi
-
-# format output
-#json, rspecish = grep -A 4 \"summary\": $audit_out
-# tap junit no output as no summary
-#documentation = tail -2 $audit_out
 
 # defaults
 output_summary="tail -2 $audit_out"

@@ -1,0 +1,17 @@
+{{ if .Vars.debian11cis_gui }}
+  {{ if .Vars.debian11cis_rule_1_8_7 }}
+    {{ if or (eq .Vars.system_type "Server") (.Vars.debian11_level_2) }}
+command:
+  idle_lock:
+    title: 1.8.7 Ensure GDM disabling automatic mounting of removable media is not overridden
+    exec: echo "TODO"
+    exit-status: 0
+    stdout:
+    - '!/^TODO/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.8.7
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_1_4_3 }}
+command:
+  auditd_log_groups:
+    title: 4.1.4.3 | Ensure only authorized groups are assigned ownership of audit log files
+    exec: 'grep -Piw -- ''^\h*log_group\h*=\h*(adm|root)\b'' /etc/audit/auditd.conf'
+    exit-status: 0
+    stdout:
+    - '/log_group = (adm|root)/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.4.3
+{{ end }}

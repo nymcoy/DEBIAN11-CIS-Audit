@@ -1,11 +1,11 @@
-{{ if .Vars.ubuntu20cis_rule_6_2_12 }}
+{{ if .Vars.debian11cis_rule_6_2_12 }}
 command:
-  root_path_check:
-    title: 6.2.12 | Ensure root PATH Integrity
-    exec: "/bin/bash --login -c 'env | grep ^PATH=' | sed -e 's/PATH=//' -e 's/::/:/' -e 's/:$//' -e 's/:/\\n/g'"
+  home_dirs_owned:
+    title: 6.2.12 | Ensure local interactive users own their home directories
+    exec: "getent passwd {1000..60000} |  awk -F: '{ print $1  \" \"  $7 }' | while read user dir; do if [ $user != 'ftpd' ]; then owner=$(stat -L -c \"%U\" \"$dir\"); if [ \"$owner\" != \"$user\" ]; then echo \"home dir for $user owned by $owner\"; fi; fi; done"
     exit-status: 0
     stdout:
-    - '!/\\./'
+    - '!/./'
     meta:
       server: 1
       workstation: 1

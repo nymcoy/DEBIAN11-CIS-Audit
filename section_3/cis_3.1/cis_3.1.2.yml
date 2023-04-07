@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_1_2 }}
+{{ if .Vars.debian11cis_rule_3_1_2 }}
 command:
   wireless_disabled:
     title: 3.1.2 | L1 | Ensure wireless interfaces are disabled

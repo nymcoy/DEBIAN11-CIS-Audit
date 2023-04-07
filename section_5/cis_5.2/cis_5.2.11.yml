@@ -1,0 +1,18 @@
+{{ if .Vars.debian11cis_rule_5_2_11 }}
+command:
+  ssh_rhosts:
+    title: 5.2.11 | Ensure SSH IgnoreRhosts is enabled
+    exec: grep -Ei "Ignorerhosts" /etc/ssh/sshd_config
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '/^(?i)Ignorerhosts yes/'
+    - '!/^(?i)Ignorerhosts no/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.2.11
+{{ end }}

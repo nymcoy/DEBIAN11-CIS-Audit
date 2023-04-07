@@ -1,20 +1,14 @@
-{{ if .Vars.ubuntu20cis_level_2 }}
-  {{ if .Vars.ubuntu20cis_rule_5_3_6 }}
+{{ if .Vars.debian11cis_rule_5_3_6 }}
 command:
-  ssh_x11:
-    title: 5.3.6 | Ensure SSH X11 forwarding is disabled
-    exec: grep -Ei "X11forwarding" /etc/ssh/sshd_config
-    exit-status:
-      or:
-      - 0
-      - 1
+  sudo_timeout: 
+    title: 5.3.6 | Ensure sudo authentication timeout is configured correctly
+    exec: 'sudo -V | grep "Authentication timestamp timeout:"' 
+    exit-status: 0
     stdout:
-    - '/^(?i)X11forwarding no/'
-    - '!/^(\s+|)x11forwarding yes/'
+    - '!/-1/'
     meta:
-      server: 2
+      server: 1
       workstation: 1
       CIS_ID: 
       - 5.3.6
-  {{ end }}
 {{ end }}

@@ -1,0 +1,20 @@
+{{ if .Vars.debian11cis_rule_5_2_14 }}
+command:
+  sshd_MACS:
+    title: 5.2.14 | Ensure only strong MACs are used
+    exec: grep -Ei "^MACs" /etc/ssh/sshd_config
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - {{ .Vars.debian11cis_ssh_strong_macs }}
+    {{ range .Vars.debian11cis_ssh_weak_macs }}
+    - !{{ . }}
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.2.14
+{{ end }}

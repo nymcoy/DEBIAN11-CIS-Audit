@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_1_4_2 }}
+command:
+  auditd_log_owners:
+    title: 4.1.4.2 | Ensure only authorized users own audit log files
+    exec: '[ -f /etc/audit/auditd.conf ] && find "$(dirname $(awk -F "=" ''/^\s*log_file/ {print $2}'' /etc/audit/auditd.conf | xargs))" -type f ! -user root -exec stat -Lc "%n %U" {} +'
+    exit-status: 0
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.4.2
+{{ end }}

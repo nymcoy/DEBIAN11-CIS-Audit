@@ -1,0 +1,23 @@
+{{ if .Vars.debian11cis_rule_1_1_8 }}
+mount:
+  /dev/shm:
+    title: 1.1.8.1-3 | Ensure /dev/shm is configured with mount options
+    exists: true
+    opts:
+    {{ if .Vars.debian11cis_rule_1_1_8_1 }}
+    - nodev
+    {{ end }}
+    {{ if .Vars.debian11cis_rule_1_1_8_3 }}
+    - nosuid
+    {{ end }}
+    {{ if .Vars.debian11cis_rule_1_1_8_2 }}
+    - noexec
+    {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.1.8.1
+      - 1.1.8.2
+      - 1.1.8.3
+{{ end }}

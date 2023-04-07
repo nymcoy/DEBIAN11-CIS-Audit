@@ -1,8 +1,8 @@
-{{ if not .Vars.ubuntu20cis_rsh_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_2_2 }}
+{{ if not .Vars.debian11cis_avahi_server }}
+  {{ if .Vars.debian11cis_rule_2_2_2 }}
 package:
-  rsh-client:
-    title: 2.2.2 | Ensure rsh client is not installed
+  avahi-daemon:
+    title: 2.2.2 | Ensure Avahi Server is not installed
     installed: false
     meta:
       server: 1

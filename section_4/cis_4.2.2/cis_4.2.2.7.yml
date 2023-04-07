@@ -1,0 +1,21 @@
+{{ if .Vars.debian11cis_rule_4_2_2_7 }}
+command:
+  rsyslog_des_hosts:
+    title: 4.2.2.7 | Ensure rsyslog is not configured to receive logs from a remote client | ModLoad
+    exec: grep -P -- '^\h*module\(load="imtcp"\)' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+    exit-status: 1
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.2.7
+  rsyslog_des_hosts_tcp:
+    title: 4.2.2.7 | Ensure rsyslog is not configured to receive logs from a remote client | TCP Port
+    exec: grep -P -- '^\h*input\(type="imtcp" port="514"\)' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+    exit-status: 1
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.2.7
+{{ end }}

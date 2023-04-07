@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_1_7_3 }}
+{{ if .Vars.debian11cis_rule_1_7_3 }}
 command:
   cremote_login_banner:
     title: 1.7.3 | Ensure remote login warning banner is configured properly
@@ -15,5 +14,4 @@ command:
       workstation: 1
       CIS_ID: 
       - 1.7.3
-  {{ end }}
 {{ end }}

@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_1_7_4 }}
+{{ if .Vars.debian11cis_rule_1_7_4 }}
 exec:
   motd_permissions:
     title: 1.7.4 | Ensure permissions on /etc/motd are configured
@@ -12,5 +11,4 @@ exec:
       workstation: 1
       CIS_ID: 
       - 1.7.4
-  {{ end }}
 {{ end }}

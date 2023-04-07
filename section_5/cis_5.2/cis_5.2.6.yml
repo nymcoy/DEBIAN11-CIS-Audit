@@ -1,0 +1,18 @@
+{{ if .Vars.debian11cis_rule_5_2_6 }}
+command:
+  ssh_usepam:
+    title: 5.2.6 | Ensure SSH PAM is enabled
+    exec: grep -Ei "^usepam" /etc/ssh/sshd_config
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - 'UsePAM yes'
+    - '!/^UsePAM no/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.2.6
+{{ end }}

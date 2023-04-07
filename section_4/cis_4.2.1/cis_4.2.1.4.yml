@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_2_1_4 }}
+command:
+  journald_persist:
+    title: 4.2.1.4 | Ensure journald is configured to write logfiles to persistent disk
+    exec: 'grep ^\s*Storage /etc/systemd/journald.conf'
+    exit-status: 0
+    stdout:
+    - Storage=persistent
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.1.4
+{{ end }}

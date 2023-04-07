@@ -1,11 +1,11 @@
-{{ if .Vars.ubuntu20cis_rule_6_1_2 }}
+{{ if .Vars.debian11cis_rule_6_1_2 }}
 command:
-  passwd_perms:
-    title: 6.1.2 | Ensure permissions on /etc/passwd are configured
-    exec:  stat -L -c "%a %U %G" /etc/passwd
+  passwd-_perms:
+    title: 6.1.2 | Ensure permissions on /etc/passwd- are configured
+    exec:  stat -L -c "%a %u %U %g %G" /etc/passwd-
     exit-status: 0
     stdout:
-    -  '/6[0.4][0,4] root root/'
+    -  '/(0|[4,6][0,4][0,4]) 0 root 0 root/'
     meta:
       server: 1
       workstation: 1

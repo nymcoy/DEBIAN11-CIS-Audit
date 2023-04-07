@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_1_2 }}
+{{ if .Vars.debian11cis_rule_5_1_2 }}
 file:
   /etc/crontab:
     title: 5.1.2 | Ensure permissions on /etc/crontab are configured
@@ -12,7 +11,6 @@ file:
       workstation: 1
       CIS_ID: 
       - 5.1.2
-  {{ end }}
 {{ end }}
 
 

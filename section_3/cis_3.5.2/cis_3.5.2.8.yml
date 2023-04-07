@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_2_8 }}
+{{ if .Vars.debian11cis_rule_3_5_2_8 }}
 command:
   nft_def_deny:
     title: 3.5.2.8 | Ensure nftables default deny firewall policy

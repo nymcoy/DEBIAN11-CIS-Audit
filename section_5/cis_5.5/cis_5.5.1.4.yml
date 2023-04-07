@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_5_1_4 }}
+{{ if .Vars.debian11cis_rule_5_5_1_4 }}
 command:
   inactive_passwd:
     title: 5.5.1.4 | Ensure inactive password lock is 30 days or less | password
@@ -23,5 +22,4 @@ command:
       workstation: 1
       CIS_ID: 
       - 5.5.1.4
-  {{ end }}
 {{ end }}

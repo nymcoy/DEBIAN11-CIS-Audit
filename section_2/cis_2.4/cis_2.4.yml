@@ -1,0 +1,13 @@
+{{ if .Vars.debian11cis_rule_2_4 }}
+command:
+  non_essen_svcs:
+    title: 2.4 | Ensure nonessential services are removed or masked
+    exec: ss -plntu | awk 'NF>1 {print $2}' FS=\" | grep -vE "{{- .Vars.debian11cis_allowed_services -}}"
+    exit-status: 1
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.4
+{{ end }}

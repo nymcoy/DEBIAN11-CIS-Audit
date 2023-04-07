@@ -1,19 +1,14 @@
-{{ if .Vars.ubuntu20cis_level_2 }}
-  {{ if .Vars.run_heavy_tests }}
-    {{ if .Vars.ubuntu20cis_rule_6_1_1 }}
+{{ if .Vars.debian11cis_rule_6_1_1 }}
 command:
-  rpm_filecheck:
-    title: 6.1.1 | Audit system file permissions
-    exec: echo "Manual Check of packages required"
+  passwd_perms:
+    title: 6.1.1 | Ensure permissions on /etc/passwd are configured
+    exec:  stat -Lc "%a %u %U %g %G" /etc/passwd
     exit-status: 0
     stdout:
-    - '!/^Manual/'
-    timeout: {{ .Vars.timeout_ms }}
+    -  '/6[0-4][0-4] 0 root 0 root/'
     meta:
-      server: 2
-      workstation: 2
+      server: 1
+      workstation: 1
       CIS_ID:
       - 6.1.1
-    {{ end }}
-  {{ end }}
 {{ end }}

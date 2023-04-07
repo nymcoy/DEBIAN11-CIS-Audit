@@ -1,0 +1,16 @@
+{{ if .Vars.debian11cis_rule_4_2_1_6 }}
+file:
+  /etc/systemd/journald.conf:
+    title: 4.2.1.6 | Ensure journald log rotation is configured per site policy
+    contains:
+    - '/^SystemMaxUse=/'
+    - '/^SystemKeepFree=/'
+    - '/^RuntimeMaxUse=/'
+    - '/^RuntimeKeepFree=/'
+    - '/^MaxFileSec=/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.1.6
+{{ end }}

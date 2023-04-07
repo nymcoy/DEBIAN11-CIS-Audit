@@ -1,8 +1,9 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_3_3_2 }}
+{{ if .Vars.debian11cis_ipv6_required }}
+  {{ if .Vars.debian11cis_rule_3_5_3_3_2 }}
 command:
-  ipt6_conns_config:
-    title: 3.5.3.3.2 | Ensure ip6tables outbound and established connections are configured 
-    exec: echo "Manual - Please confirm ip6tables outbound and connections are configured and matched site policy"
+  ipt6_loopback:
+    title: 3.5.3.3.2 | Ensure ip6tables loopback traffic is configured
+    exec: echo "Manual - Please confirm ip6tables loopback connections are configured and matched site policy"
     exit-status: 0
     stdout:
     - '!/^Manual/'
@@ -11,4 +12,5 @@ command:
       workstation: 1
       CIS_ID:
       - 3.5.3.3.2
+  {{ end }}
 {{ end }}

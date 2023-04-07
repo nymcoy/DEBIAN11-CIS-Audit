@@ -1,0 +1,12 @@
+{{ if .Vars.debian11cis_rule_4_2_1_2 }}
+service:
+  systemd-journald.service:
+    title: 4.2.1.2| Ensure journald service is enabled
+    enabled: true
+    running: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.1.2
+{{ end }}

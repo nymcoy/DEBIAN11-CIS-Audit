@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_2_7 }}
+{{ if .Vars.debian11cis_rule_3_5_2_7 }}
 command:
   nft_conns:
     title: 3.5.2.7 | Ensure nftables outbound and established connections are configured

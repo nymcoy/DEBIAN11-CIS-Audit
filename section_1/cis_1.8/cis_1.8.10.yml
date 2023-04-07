@@ -1,0 +1,15 @@
+{{ if .Vars.debian11cis_gui }}
+  {{ if .Vars.debian11cis_rule_1_8_10 }}
+file:
+  /etc/gdm3/custom.conf:
+    title: 1.8.10 | Ensure XDCMP is not enabled
+    exists: true
+    contains:
+    - '!/^Enable=true/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 1.8.10
+  {{ end }}
+{{ end }}

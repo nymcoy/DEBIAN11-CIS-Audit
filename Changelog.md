@@ -1,4 +1,4 @@
-# Changes to Ubunut20-CIS-Audit
+# Changes to DEBIAN11-CIS-Audit
 
 ## 0.1 initial release
 

@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_1_7_1 }}
+{{ if .Vars.debian11cis_rule_1_7_1 }}
 command:
   check_motd_files:
     title: 1.7.1 | Ensure message of the day is configured properly
@@ -15,5 +14,4 @@ command:
       workstation: 1
       CIS_ID: 
       - 1.7.1
-  {{ end }}
 {{ end }}

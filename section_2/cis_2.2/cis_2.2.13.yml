@@ -1,0 +1,12 @@
+{{ if not .Vars.debian11cis_snmp_server }}
+  {{ if .Vars.debian11cis_rule_2_2_13 }}
+package:
+  snmp:
+    title: 2.2.13 | Ensure SNMP Server is not installed
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.2.13
+  {{ end }}
+{{ end }}

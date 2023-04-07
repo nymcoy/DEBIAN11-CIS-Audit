@@ -1,0 +1,17 @@
+{{ if .Vars.debian11cis_rule_5_2_4 }}
+command:
+  sshd_access_limited:
+    title: 5.2.4 | Ensure SSH access is limited 
+    exec: grep -E "^(Allow|Deny)(User|Group)" /etc/ssh/sshd_config
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - "^(Allow|Deny)(User|Group)"
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.2.4
+{{ end }}

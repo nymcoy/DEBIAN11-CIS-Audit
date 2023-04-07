@@ -1,12 +1,12 @@
-{{ if not .Vars.ubuntu20cis_talk_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_2_3 }}
+{{ if not .Vars.debian11cis_cups_server }}
+  {{ if .Vars.debian11cis_rule_2_2_3 }}
 package:
-  talk:
-    title: 2.2.3 | Ensure talk client is not installed
+  cups:
+    title: 2.2.3 | Ensure CUPS Server is not installed
     installed: false
     meta:
       server: 1
-      workstation: 1
+      workstation: 2
       CIS_ID: 2.2.3
   {{ end }}
 {{ end }}

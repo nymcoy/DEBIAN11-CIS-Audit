@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_1_4_7 }}
+command:
+  auditd_config_group:
+    title: 4.1.4.7 | Ensure audit configuration files belong to group root
+    exec: 'find /etc/audit/ -type f \( -name ''*.conf'' -o -name ''*.rules'' \) ! -group root'
+    exit-status: 0
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.4.7
+{{ end }}

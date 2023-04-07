@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_1_4_10 }}
+command:
+  auditd_tool_group:
+    title: 4.1.4.10 | Ensure audit tools belong to group root
+    exec: 'stat -c "%n %a %U %G" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/augenrules | grep -Pv -- ''^\h*\H+\h+([0-7][0,1,4,5][0,1,4,5])\h+root\h+root\h*$'''
+    exit-status: 1
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.4.10
+{{ end }}

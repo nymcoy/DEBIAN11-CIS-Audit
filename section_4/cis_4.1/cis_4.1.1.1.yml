@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_4_1_1_1 }}
+{{ if .Vars.debian11cis_rule_4_1_1_1 }}
 package:
   auditd:
     title: 4.1.1.1 | Ensure auditd is installed | auditd pkg

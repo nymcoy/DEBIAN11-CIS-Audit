@@ -1,15 +1,15 @@
-{{ if .Vars.ubuntu20cis_gui }}
-  {{ if .Vars.ubuntu20cis_rule_1_8_4 }}
-file:
-  /etc/gdm3/custom.conf:
-    title: 1.8.4 | Ensure XDCMP is not enabled
-    exists: true
-    contains:
-    - '!/^Enable=true/'
+{{ if .Vars.debian11cis_gui }}
+  {{ if .Vars.debian11cis_rule_1_8_4 }}
+command:
+  idle_lock:
+    title: 1.8.4 Ensure GDM screen locks when the user is idle
+    exec: echo "TODO"
+    exit-status: 0
+    stdout:
+    - '!/^TODO/'
     meta:
       server: 1
       workstation: 1
-      CIS_ID: 
-      - 1.8.4
+      CIS_ID: 1.8.4
   {{ end }}
 {{ end }}

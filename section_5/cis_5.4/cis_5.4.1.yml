@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_4_1 }}
+{{ if .Vars.debian11cis_rule_5_4_1 }}
 package:
   libpam-pwquality:
     title: 5.4.1 | Ensure password creation requirements are configured | package
@@ -14,7 +13,7 @@ file:
     title: 5.4.1 | Ensure password creation requirements are configured | pwquality
     exists: true
     contains:
-    {{ range .Vars.ubuntu20cis_pam_password }}
+    {{ range .Vars.debian11cis_pam_password }}
     - {{ . }}
     {{ end }}
     meta:
@@ -22,5 +21,4 @@ file:
       workstation: 1
       CIS_ID: 
       - 5.4.1
-  {{ end }}
 {{ end }}

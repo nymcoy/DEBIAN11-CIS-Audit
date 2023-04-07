@@ -1,14 +1,17 @@
-{{ if .Vars.ubuntu20cis_rule_6_1_9 }}
+{{ if .Vars.run_heavy_tests }}
+  {{ if .Vars.debian11cis_rule_6_1_9 }}
 command:
-  gshadow-_perms:
-    title: 6.1.9 | Ensure permissions on /etc/gshadow- are configured
-    exec: stat -L -c "%a %U %G" /etc/gshadow-
+  world_writable:
+    title: 6.1.9 | Ensure no world writable files exist
+    exec: "df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -0002"
     exit-status: 0
+    timeout: {{ .Vars.timeout_ms }}
     stdout:
-    - '/6[0,4]0 root (root|shadow)/'
+    - '!/./'
     meta:
       server: 1
       workstation: 1
       CIS_ID:
       - 6.1.9
+  {{ end }}
 {{ end }}

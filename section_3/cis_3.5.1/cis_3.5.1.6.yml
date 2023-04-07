@@ -1,11 +1,11 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_1_6 }}
+{{ if .Vars.debian11cis_rule_3_5_1_6 }}
 command:
   ufw_open_ports:
     title: 3.5.1.6 | Ensure ufw firewall rules exist for all open ports
-    exec: echo "Manual - Please confirm firewall rules exist for open ports match site policies"
-    exit-status: 0
+    exec: 'section_3/cis_3.5.1/cis_3.5.1.6.sh'
+    exit-status: 1
     stdout:
-    - '!/^Manual/'
+    - '!/.*/'
     meta:
       server: 1
       workstation: 1

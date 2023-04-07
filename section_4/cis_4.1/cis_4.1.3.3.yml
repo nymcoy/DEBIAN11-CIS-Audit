@@ -1,0 +1,25 @@
+{{ if .Vars.debian11cis_rule_4_1_3_3 }}
+command:
+  auditd_sudo_log_cnf:
+    title: 4.1.3.3 | Ensure events that modify the sudo log file are collected | Config
+    exec: grep -h sudo_log_file /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - -w {{ .Vars.debian11_varlog_location }} -p wa -k sudo_log_file
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.3.3
+  auditd_sudo_log_live:
+    title: 4.1.3.3 | Ensure events that modify the sudo log file are collected | Live
+    exec: auditctl -l | grep sudo_log_file
+    exit-status: 0
+    stdout:
+    - -w {{ .Vars.debian11_varlog_location }} -p wa -k sudo_log_file
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.3.3
+  {{ end }}

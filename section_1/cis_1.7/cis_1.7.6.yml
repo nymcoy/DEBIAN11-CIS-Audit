@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_1_7_6 }}
+{{ if .Vars.debian11cis_rule_1_7_6 }}
 file:
   /etc/issue.net:
     title: 1.7.6 | Ensure permissions on /etc/issue.net are configured
@@ -12,5 +11,4 @@ file:
       workstation: 1
       CIS_ID: 
       - 1.7.6
-  {{ end }}
 {{ end }}

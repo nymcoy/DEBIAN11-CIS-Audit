@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_5_4 }}
+{{ if .Vars.debian11cis_rule_5_5_4 }}
 command:
   umask_027:
     title: 5.5.4 | Ensure default user umask is 027 or more restrictive | profile_files
@@ -26,5 +25,4 @@ file:
       workstation: 1
       CIS_ID: 
       - 5.5.4
-  {{ end }}
 {{ end }}

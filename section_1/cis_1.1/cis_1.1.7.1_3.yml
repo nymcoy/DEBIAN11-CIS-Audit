@@ -1,0 +1,22 @@
+{{ if .Vars.debian11cis_level_2 }}
+  {{ if .Vars.debian11cis_rule_1_1_7_1 }}
+mount:
+  /home:
+    title: 1.1.7.1-3 | Ensure seperate partition for /home with mount options
+    exists: true
+    opts:
+    {{ if .Vars.debian11cis_rule_1_1_7_2 }} 
+    - nodev
+    {{ end }}
+    {{ if .Vars.debian11cis_rule_1_1_7_3 }}
+    - nosuid
+    {{ end }}
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 1.1.7.1
+      - 1.1.7.2
+      - 1.1.7.3
+  {{ end }}
+{{ end }}

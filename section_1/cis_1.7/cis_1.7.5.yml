@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_1_7_5 }}
+{{ if .Vars.debian11cis_rule_1_7_5 }}
 file:
   /etc/issue:
     title: 1.7.5 | Ensure permissions on /etc/issue are configured
@@ -12,5 +11,4 @@ file:
       workstation: 1
       CIS_ID: 
       - 1.7.5
-  {{ end }}
 {{ end }}

@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_5_4_5 }}
+command:
+  user_pass_hash_algo: 
+    title: 5.4.5 | Ensure all current passwords uses the configured hashing algorithm
+    exec: 'grep "^[^:]*:\$[^{{ .Vars.debian11cis_hash_prefix }}]" /etc/shadow' 
+    exit-status: 1
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.4.5
+{{ end }}

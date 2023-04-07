@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_1_4_1 }}
+command:
+  auditd_log_perms:
+    title: 4.1.4.1 | Ensure audit log files are mode 0640 or less permissive
+    exec: '[ -f /etc/audit/auditd.conf ] && find "$(dirname $(awk -F "=" ''/^\s*log_file/ {print $2}'' /etc/audit/auditd.conf | xargs))" -type f \( ! -perm 600 -a ! -perm 0400 -a ! -perm 0200 -a ! -perm 0000 -a ! -perm 0640 -a ! -perm 0440 -a ! -perm 0040 \) -exec stat -Lc "%n %#a" {} +'
+    exit-status: 0
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID: 
+      - 4.1.4.1
+{{ end }}

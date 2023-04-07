@@ -1,0 +1,53 @@
+{{ if .Vars.debian11cis_rule_2_1_1_1 }}
+service:
+  timesyncd:
+    title: 2.1.1.1 | Ensure a single time synchronization daemon is in use | timesyncd
+  {{ if eq .Vars.debian11cis_time_service "timesyncd" }}
+    enabled: true
+  {{ else }}
+    enabled: false
+    running: false
+  {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.1.1
+package:
+  chrony: 
+    title: 2.1.1.1 | Ensure a single time synchronization daemon is in use | timesyncd
+  {{ if eq .Vars.debian11cis_time_service "chrony" }}
+    installed: true
+  {{ else }}
+    installed: false 
+  {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.1.1
+  ntp: 
+    title: 2.1.1.1 | Ensure a single time synchronization daemon is in use | timesyncd
+  {{ if eq .Vars.debian11cis_time_service "ntp" }}
+    installed: true
+  {{ else }}
+    installed: false 
+  {{ end }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.1.1
+  {{ if ne .Vars.debian11cis_time_service "timesyncd" }}
+    {{ if ne .Vars.debian11cis_time_service "chrony" }}
+      {{ if ne .Vars.debian11cis_time_service "ntp" }}
+command:
+  no_valid_time_sync_demon_specified:
+    title: 2.1.1.1 | Ensure a single time synchronization daemon is in use | timesyncd
+    exec: "echo 'No known time synchronization daemon specified for audit.'"
+    exit-status: 1 #fail on purpose
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.1.1
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

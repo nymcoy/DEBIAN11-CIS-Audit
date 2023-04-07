@@ -1,0 +1,12 @@
+{{ if not .Vars.debian11cis_squid_server }}
+  {{ if .Vars.debian11cis_rule_2_2_12 }}
+package:
+  squid:
+    title: 2.2.12 | Ensure HTTP Proxy Server is not installed
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.2.12
+  {{ end }}
+{{ end }}

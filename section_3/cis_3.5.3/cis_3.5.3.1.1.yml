@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_3_1_1 }}
+{{ if .Vars.debian11cis_rule_3_5_3_1_1 }}
 package:
   iptables:
     title: 3.5.3.1.1 | Ensure iptables packages are installed | iptables pkg

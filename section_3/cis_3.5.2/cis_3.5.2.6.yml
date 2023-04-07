@@ -1,4 +1,4 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_2_6 }}
+{{ if .Vars.debian11cis_rule_3_5_2_6 }}
 command:
   nft_loopback:
     title: 3.5.2.6 | Ensure nftables loopback traffic is configured

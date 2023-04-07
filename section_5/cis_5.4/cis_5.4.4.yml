@@ -1,16 +1,25 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_4_4 }}
-file:
-  /etc/pam.d/common-password:
-    title: 5.4.4 | L1 | Ensure password hashing algorithm is SHA-512 | password-auth
-    exists: true
-    contains:
-    - '/^password\s+\[success=1 default=ignore\]\s+pam_unix.so obscure.*\ssha512/'
-    - '!/^password.*md5/'
+{{ if .Vars.debian11cis_rule_5_4_4 }}
+command:
+  pam_hash: 
+    title: 5.4.4 | Ensure password hashing algorithm is up to date with the latest standards | common-password
+    exec: 'grep -Pi -- ''^\h*password\h+[^#\n\r]+\h+pam_unix.so([^#\n\r]+\h+)?{{ .Vars.debian11cis_hash }}\b'' /etc/pam.d/common-password' 
+    exit-status: 0
+    stdout:
+    - '/.*/'
     meta:
       server: 1
       workstation: 1
       CIS_ID: 
       - 5.4.4
-  {{ end }}
+  login_defs_hash: 
+    title: 5.4.4 | Ensure password hashing algorithm is up to date with the latest standards | login.defs
+    exec: 'grep -Pi -- ''^\h*ENCRYPT_METHOD\h+"?(sha512|yescrypt)\b'' /etc/login.defs' 
+    exit-status: 0
+    stdout:
+    - ENCRYPT_METHOD {{ .Vars.debian11cis_hash }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.4.4
 {{ end }}

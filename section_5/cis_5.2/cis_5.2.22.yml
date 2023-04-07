@@ -1,0 +1,20 @@
+{{ if .Vars.debian11cis_rule_5_2_22 }}
+command:
+  sshd_clientalive:
+    title: 5.2.22 | Ensure SSH Idle Timeout Interval is configured
+    exec: grep -Ei "^ClientAlive" /etc/ssh/sshd_config
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - 'ClientAliveInterval {{ .Vars.debian11cis_ssh_aliveinterval }}'
+    - 'ClientAliveCountMax {{ .Vars.debian11cis_ssh_countmax }}'
+    - '/ClientAliveInterval ([1-9]|[1-2][0-9][0-9]|300)/'
+    - '/ClientAliveCountMax [0-3]/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 5.2.22
+{{ end }}

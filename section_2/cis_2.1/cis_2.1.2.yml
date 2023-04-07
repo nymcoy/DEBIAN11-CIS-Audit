@@ -1,12 +1,39 @@
-{{ if not .Vars.ubuntu20cis_xwindows_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_1_2 }}
-package:
-  xserver-xorg:
-    title: 2.1.2 | Ensure X Window System is not installed
-    installed: false
+{{ if eq .Vars.debian11cis_time_service "chrony" }}
+  {{ if .Vars.debian11cis_rule_2_1_2_1 }}
+command:
+  check:
+    title: 2.1.2.1 | Ensure chrony is configured with authorized timeserver
+    exec: 'if [ `grep -Pr --include=*.conf --include=*.sources ''^\h*(pool)\h+\H+'' /etc/chrony/ | wc -l` = 1 ] || [ `grep -Pr --include=*.conf --include=*.sources ''^\h*(server)\h+\H+'' /etc/chrony/ | wc -l` >=3 ]; then echo OK; fi'
+    exit-status: 0
+    stdout: 
+    - OK
     meta:
       server: 1
-      workstation: NA
-      CIS_ID: 2.1.2
+      workstation: 1
+      CIS_ID: 2.1.2.1
+  {{ end }}
+  {{ if .Vars.debian11cis_rule_2_1_2_2 }}
+command:
+  check_chrony_user:
+    title: 2.1.2.2 | Ensure chrony is running as user _chrony
+    exec: 'ps -ef | awk ''(/[c]hronyd/ && $1!="_chrony") { print $1 }'' | wc -l'
+    exit-status: 0
+    stdout: 
+    - 0
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.2.2
+  {{ end }}
+  {{ if .Vars.debian11cis_rule_2_1_2_3 }}
+service:
+  chronyd:
+    title: 2.1.2.3 | Ensure chrony is enabled and running
+    enabled: true
+    running: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.1.2.3
   {{ end }}
 {{ end }}

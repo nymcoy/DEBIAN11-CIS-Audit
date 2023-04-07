@@ -1,5 +1,5 @@
-{{ if not .Vars.ubuntu20cis_is_router }}
-  {{ if .Vars.ubuntu20cis_rule_3_2_2 }}
+{{ if not .Vars.debian11cis_is_router }}
+  {{ if .Vars.debian11cis_rule_3_2_2 }}
 kernel-param:
   net.ipv4.ip_forward:
     title: 3.2.2 | Ensure IP forwarding is disabled | IPv4
@@ -9,7 +9,7 @@ kernel-param:
       workstation: 1
       CIS_ID:
       - 3.2.2
-  {{ if .Vars.ubuntu20cis_ipv6_required }}
+  {{ if .Vars.debian11cis_ipv6_required }}
   net.ipv6.conf.all.forwarding:
     title: 3.2.2 | Ensure IP forwarding is disabled | IPv6
     value: '0'
@@ -35,7 +35,7 @@ command:
       workstation: 1
       CIS_ID:
       - 3.2.2
-  {{ if .Vars.ubuntu20cis_ipv6_required }}
+  {{ if .Vars.debian11cis_ipv6_required }}
   ipv6_ip_forward:
     title: 3.2.2 | Ensure IP forwarding is disabled | IPv6 config
     exec: grep -E "^\s*net\.ipv6\.conf\.all\.forwarding" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf

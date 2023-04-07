@@ -1,9 +1,9 @@
 {{ if .Vars.run_heavy_tests }}
+  {{ if .Vars.debian11cis_rule_6_1_10 }}
 command:
-  {{ if .Vars.ubuntu20cis_rule_6_1_10 }}
-  world_writable:
-    title: 6.1.10 | Ensure no world writable files exist
-    exec: "df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type f -perm -0002"
+  unowned_dirs:
+    title: 6.1.10 | Ensure no unowned files or directories exist
+    exec: "df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -nouser"
     exit-status: 0
     timeout: {{ .Vars.timeout_ms }}
     stdout:

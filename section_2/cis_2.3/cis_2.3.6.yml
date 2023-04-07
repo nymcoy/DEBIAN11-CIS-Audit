@@ -1,0 +1,12 @@
+{{ if not .Vars.debian11cis_rpc_required }}
+  {{ if .Vars.debian11cis_rule_2_3_6 }}
+package:
+  rpcbind:
+    title: 2.3.6 | Ensure RPC is not installed
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.3.6
+  {{ end }}
+{{ end }}

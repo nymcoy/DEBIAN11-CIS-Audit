@@ -1,5 +1,4 @@
-{{ if .Vars.ubuntu20cis_level_1 }}
-  {{ if .Vars.ubuntu20cis_rule_5_1_1 }}
+{{ if .Vars.debian11cis_rule_5_1_1 }}
 package:
   cron:
     title: 5.1.1 | Ensure cron daemon is enabled and running | pkg
@@ -19,7 +18,6 @@ service:
       workstation: 1
       CIS_ID: 
       - 5.1.1
-  {{ end }}
 {{ end }}
 
 

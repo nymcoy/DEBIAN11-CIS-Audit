@@ -1,0 +1,14 @@
+{{ if .Vars.debian11cis_rule_4_2_2_6 }}
+command:
+  remote_syslog:
+    title: 4.2.2.6 | Ensure rsyslog is configured to send logs to a remote host
+    exec: 'grep -E ''^\s*([^#]+\s+)?action\(([^#]+\s+)?\btarget=\"?[^#"]+\"?\b'' /etc/rsyslog.conf /etc/rsyslog.d/*.conf'
+    exit-status: 0
+    stdout:
+    - '/\*\.\* .* target="*./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.2.6
+{{ end }}

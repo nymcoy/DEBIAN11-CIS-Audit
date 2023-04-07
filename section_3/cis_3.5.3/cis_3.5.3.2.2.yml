@@ -1,11 +1,23 @@
-{{ if .Vars.ubuntu20cis_rule_3_5_3_2_2 }}
+{{ if .Vars.debian11cis_rule_3_5_3_2_2 }}
 command:
-  ipt_conns_config:
-    title: 3.5.3.2.2 | Ensure iptables outbound and established connections are configured 
-    exec: echo "Manual - Please confirm iptables outbound and connections are configured and matched site policy"
+  ipt_loopback_in:
+    title: 3.5.3.2.2 | Ensure iptables loopback traffic is configured | input
+    exec: iptables -L INPUT -v -n
     exit-status: 0
     stdout:
-    - '!/^Manual/'
+    - '/ACCEPT\s+all\s+--\s+lo\s+\*\s+0\.0\.0\.0\/0\s+0\.0\.0\.0\/0/'
+    - '/DROP\s+all\s+--\s+\*\s+\*\s+127\.0\.0\.0\/8\s+0\.0\.0\.0\/0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.5.3.2.2
+  ipt_loopback_out:
+    title: 3.5.3.2.2 | Ensure iptables loopback traffic is configured | output
+    exec: iptables -L OUTPUT -v -n
+    exit-status: 0
+    stdout:
+    - '/ACCEPT\s+all\s+--\s+\*\s+lo\s+0\.0\.0\.0\/0\s+0\.0\.0\.0\/0/'
     meta:
       server: 1
       workstation: 1

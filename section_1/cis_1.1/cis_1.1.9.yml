@@ -1,0 +1,15 @@
+{{ if not .Vars.debian11cis_allow_autofs}}
+  {{ if .Vars.debian11cis_rule_1_1_9 }}
+    {{ if or (eq .Vars.system_type "Server") (.Vars.debian11_level_2) }}
+service:
+  autofs:
+    title: 1.1.9 | Disable Automounting
+    enabled: false
+    running: false
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.1.9
+    {{ end }}
+  {{ end }}
+{{ end }}

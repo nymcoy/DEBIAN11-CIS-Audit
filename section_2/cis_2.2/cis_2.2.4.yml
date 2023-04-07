@@ -1,8 +1,8 @@
-{{ if not .Vars.ubuntu20cis_telnet_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_2_4 }}
+{{ if not .Vars.debian11cis_dhcp_server }}
+  {{ if .Vars.debian11cis_rule_2_2_4 }}
 package:
-  telnet:
-    title: 2.2.4 | Ensure telnet client is not installed
+  isc-dhcp-server:
+    title: 2.2.4 | Ensure DHCP Server is not installed
     installed: false
     meta:
       server: 1

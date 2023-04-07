@@ -1,0 +1,17 @@
+{{ if .Vars.debian11cis_rule_4_2_1_1_2 }}
+command:
+  systemd_journal_remote_config:
+    title: 4.2.1.1.2 | Ensure systemd-journal-remote is configured
+    exec: grep -P "^ *URL=|^ *ServerKeyFile=|^ *ServerCertificateFile=|^ *TrustedCertificateFile=" /etc/systemd/journal-upload.conf
+    exit-status: 0
+    stdout:
+    - URL=
+    - ServerKeyFile=
+    - ServerCertificateFile=
+    - TrustedCertificateFile=
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 
+      - 4.2.1.1.2
+{{ end }}

@@ -1,8 +1,8 @@
-{{ if not .Vars.ubuntu20cis_rpc_required }}
-  {{ if .Vars.ubuntu20cis_rule_2_2_6 }}
+{{ if not .Vars.debian11cis_nfs_server }}
+  {{ if .Vars.debian11cis_rule_2_2_6 }}
 package:
-  rpcbind:
-    title: 2.2.6 | Ensure RPC is not installed
+  nfs-kernel-server:
+    title: 2.2.6 | Ensure NFS is not installed
     installed: false
     meta:
       server: 1
