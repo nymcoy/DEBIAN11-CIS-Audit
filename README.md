@@ -1,10 +1,10 @@
-# Ubuntu 20.04 Goss config
+# Debiam 11 Goss config
 
 ## Overview
 
 based on CIS 1.0
 
-Set of configuration files and directories to run the first stages of CIS of Ubuntu 20.04 servers
+Set of configuration files and directories to run the first stages of CIS of Debian 11 servers
 
 This is configured in a directory structure level.
 
