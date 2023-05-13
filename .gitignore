@@ -10,6 +10,8 @@ tests/Dockerfile
 packer_cache
 delete*
 ignore*
+vars/*
+!vars/CIS.yml
 # VSCode
 .vscode
 

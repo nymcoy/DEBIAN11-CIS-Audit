@@ -20,7 +20,7 @@ file:
     title: 2.2.15 | Ensure mail transfer agent is configured for local-only mode | exim config
     exists: true
     contains:
-      {{ range .Vars.debian11_exim_conf }}
+      {{ range .Vars.debian11cis_exim_conf }}
     - {{ . }}
       {{ end }}
     meta:

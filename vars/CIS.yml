@@ -386,7 +386,7 @@ sshd)"
 # Mail Server config - needs to be defined as exim4 or Not_defined
 debian11cis_mailserver: Not_defined
 
-debian11_exim_conf:
+debian11cis_exim_conf:
   - dc_eximconfig_configtype='local'
   - dc_local_interfaces='127.0.0.1 ; ::1'
   - dc_readhost=''
