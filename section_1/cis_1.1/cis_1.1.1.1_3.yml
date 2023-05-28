@@ -3,9 +3,9 @@ command:
   cramfs:
     title: 1.1.1.1 | Ensure mounting of cramfs filesystems is disabled
     exit-status: 0
-    exec: if [ `lsmod | grep -c cramfs` != 0 ]; then  "modprobe -n -v jffs | grep -E '(cramfs|install)'"; else echo OK; fi
+    exec: if [ `lsmod | grep -c cramfs` != 0 ]; then  "modprobe -n -v cramfs | grep -E '(cramfs|install)'"; else echo OK; fi
     stdout:
-    - '/(install /bin/true|OK)/'
+    - '/(install /bin/true|install /bin/false|OK)/'
     meta:
       server: 1
       workstation: 1
@@ -19,9 +19,9 @@ command:
       or:
       - 0
       - 1
-    exec: if [ `lsmod | grep -c squashfs` != 0 ]; then  "modprobe -n -v jffs | grep -E '(squashfs|install)'"; else echo OK; fi
+    exec: if [ `lsmod | grep -c squashfs` != 0 ]; then  "modprobe -n -v squashfs | grep -E '(squashfs|install)'"; else echo OK; fi
     stdout:
-    - '/(install /bin/true|OK)/'
+    - '/(install /bin/true|install /bin/false|OK)/'
     meta:
       server: 2
       workstation: 2
@@ -31,9 +31,9 @@ command:
   udf:
     title: 1.1.1.3 | Ensure mounting of udf filesystems is disabled
     exit-status: 0
-    exec: if [ `lsmod | grep -c udf` != 0 ]; then  "modprobe -n -v jffs | grep -E '(udf|install)'"; else echo OK; fi
+    exec: if [ `lsmod | grep -c udf` != 0 ]; then  "modprobe -n -v udf | grep -E '(udf|install)'"; else echo OK; fi
     stdout:
-    - '/(install /bin/true|OK)/'
+    - '/(install /bin/true|install /bin/false|OK)/'
     meta:
       server: 2
       workstation: 2
